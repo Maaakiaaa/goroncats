@@ -3,6 +3,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import { Home } from "./Home.jsx";
+import Quiz from "./Quiz.jsx";
 function App() {
     const [route, setRoute] = useState(() => {
     const hash = location.hash.replace("#", "");
@@ -39,7 +40,7 @@ function App() {
           />
         </>
       ) : route === "hello" ? (
-        <h1>Hello World</h1>
+        <Quiz />
       ) : (
         <Home setRoute={handleRouteChange} />
       )}
