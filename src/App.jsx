@@ -3,6 +3,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import { Home } from "./Home.jsx";
+import Quiz from "./quizzes/quiz.jsx";
 function App() {
     const [route, setRoute] = useState(() => {
     const hash = location.hash.replace("#", "");
@@ -30,16 +31,24 @@ function App() {
       {route === "home" ? (
         <>
           <img src="/neko.png" alt="Neko" className="neko-img" />
-          <img
-            src="/start.png"
-            alt="Start Button"
-            className="start-button"
-            style={{ cursor: "pointer" }}
-            onClick={() => handleRouteChange("hello")}
-          />
+          <a
+            href="/index.html#hello"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src="/start.png"
+              alt="Start Button"
+              className="start-button"
+              style={{ cursor: "pointer" }}
+            />
+          </a>
         </>
       ) : route === "hello" ? (
-        <h1>Hello World</h1>
+        <div className='background'>
+          <Quiz />
+        </div>
+        
       ) : (
         <Home setRoute={handleRouteChange} />
       )}

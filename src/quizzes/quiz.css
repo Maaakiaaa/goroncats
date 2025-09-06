@@ -1,0 +1,79 @@
+/* Styles for quiz component - fixed to viewport bottom */
+.quiz {
+  position: fixed;
+  left: 50%;
+  bottom: 30px;
+  transform: translateX(-50%);
+  width: calc(100% - 2rem);
+  max-width: 900px;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  height: 300px;
+  opacity: 0.4;
+  background: var(--Schemes-Scrim, #000);
+  border-radius: 12px;
+  box-shadow: 0 -8px 24px rgba(0,0,0,0.08);
+  z-index: 9999;
+}
+.quiz-title {
+  font-size: 40px;
+  color: #ffffff;
+  margin: 0 0 0.25rem 0;
+}
+.quiz-desc {
+  color: #555;
+  margin: 0;
+}
+/* grid container for answers */
+.quizkaitou {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  margin-top: auto; /* push grid to bottom */
+  align-items: stretch;
+}
+
+/* answer label style - flexible to 2x2 grid */
+.quizlabel {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: none;
+  font-size: 14px; /* slightly smaller */
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem 0.4rem; /* reduced padding */
+  min-height: 38px; /* ~10px smaller than before */
+  border-radius: 12px;
+  background: var(--Schemes-On-Secondary, #FFF);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  cursor: pointer;
+  user-select: none;
+}
+
+.quizlabel:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+}
+
+.quizlabel:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+.quizlabel:focus {
+  outline: 3px solid rgba(98, 0, 238, 0.2);
+  outline-offset: 2px;
+}
+
+@media (max-width: 420px) {
+  .quiz {
+    width: calc(100% - 1rem);
+    padding: 0.9rem 1rem;
+    border-radius: 10px;
+  }
+}
+
