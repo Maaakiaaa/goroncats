@@ -25,7 +25,38 @@
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
+.title-screen {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
 
+.background-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.start-button {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  bottom: calc(10% - 250px); /* 10%より100px下へ移動 */
+  transform: translateX(-50%);
+  width: 250px; /* 画像サイズに合わせて調整 */
+  cursor: pointer;
+  z-index: 1;
+  transition: transform 0.2s ease;
+}
+
+.start-button:hover {
+  transform: translateX(-50%) scale(1.05);
+}
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
