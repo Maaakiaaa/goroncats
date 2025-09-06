@@ -48,7 +48,6 @@ function App() {
         <div className='background'>
           <Quiz />
         </div>
-        
       ) : (
         <Home setRoute={handleRouteChange} />
       )}
