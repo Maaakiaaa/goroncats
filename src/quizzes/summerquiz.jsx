@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import './quiz.css'
 import quizzesData from '../data/quizzes.json'
 
-export default function SpringQuiz({ quizId = 'quiz1', startIndex = 6 }) {
+export default function SummerQuiz({ quizId = 'quiz1', startIndex = 12 }) {
   const audioRef = useRef(null)
   const [isPlaying, setIsPlaying] = useState(false)
   const [showPlayButton, setShowPlayButton] = useState(false)
@@ -35,7 +35,7 @@ export default function SpringQuiz({ quizId = 'quiz1', startIndex = 6 }) {
     setChunkStart(start)
     setChunkEnd(end)
     setCurrentQ(start)
-    console.log('[springquiz] flatQuestions built', { total: flat.length, start, end })
+    console.log('[summerquiz] flatQuestions built', { total: flat.length, start, end })
   }, [quizId, startIndex])
 
   useEffect(() => {
@@ -88,7 +88,7 @@ export default function SpringQuiz({ quizId = 'quiz1', startIndex = 6 }) {
 
     const onHash = () => {
       const h = (location.hash || '').replace('#','')
-      if (h === 'springquiz') scheduleRetries()
+      if (h === 'summerquiz') scheduleRetries()
     }
     const onUserGesture = () => { scheduleRetries() }
     window.addEventListener('hashchange', onHash)
@@ -133,7 +133,7 @@ export default function SpringQuiz({ quizId = 'quiz1', startIndex = 6 }) {
           <h2>結果</h2>
           <p>正解数: {score} / {totalShown}</p>
           <button className="ctrl primary image-btn" onClick={() => { location.hash = 'summer' }} aria-label="次へ">
-            <img src="/next.png" alt="再挑戦" />
+            <img src="/next.png" alt="次へ" />
           </button>
         </div>
       </div>
