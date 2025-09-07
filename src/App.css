@@ -85,8 +85,8 @@
 .start-button {
   position: absolute;
   bottom: 10%;
-  left: 50%;
-  bottom: calc(10% - 250px); /* 10%より100px下へ移動 */
+  left: 48%;
+  bottom: calc(10% - 60px); /* moved 80px up from previous position */
   transform: translateX(-50%);
   width: 250px; /* 画像サイズに合わせて調整 */
   cursor: pointer;

@@ -11,6 +11,7 @@ export default function Summer() {
     { image: '/hanabineko.png', text: '（夏の最高な思い出になった）' }
   ]
 
+
   const [index, setIndex] = useState(0)
   const [playing, setPlaying] = useState(false)
   const [displayedText, setDisplayedText] = useState('')
@@ -88,9 +89,7 @@ export default function Summer() {
 
   
 
-  const next = () => setIndex(i => Math.min(i + 1, scenes.length - 1))
-  const prev = () => setIndex(i => Math.max(i - 1, 0))
-  const goHome = () => { location.hash = 'home' }
+  // navigation is automatic after typing completes
 
   
 
@@ -102,6 +101,7 @@ export default function Summer() {
           <span className="typing-text">{displayedText}</span>
           <span className={`typing-caret ${typing ? 'active' : ''}`}>|</span>
         </div>
+  {/* manual next button removed; scenes auto-advance to #summerquiz */}
       </div>
     </div>
   )

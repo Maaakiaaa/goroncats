@@ -127,13 +127,14 @@ export default function SummerQuiz({ quizId = 'quiz1', startIndex = 12 }) {
 
   if (finished) {
     const totalShown = Math.max(0, chunkEnd - chunkStart)
+    try { sessionStorage.setItem('lastQuizResult', JSON.stringify({ score, total: totalShown })) } catch (e) {}
     return (
       <div className="quiz">
-        <div className="quiz-results">
+        <div className="quiz-results" style={{display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',transform:'translateY(40px) scale(1.3)'}}>
           <h2>結果</h2>
           <p>正解数: {score} / {totalShown}</p>
-          <button className="ctrl primary image-btn" onClick={() => { location.hash = 'summer' }} aria-label="次へ">
-            <img src="/next.png" alt="次へ" />
+          <button className="ctrl primary image-btn" onClick={() => { location.hash = 'autumn' }} aria-label="次へ">
+            <img src="/next.png" alt="次へ" style={{width:125,height:'auto'}} />
           </button>
         </div>
       </div>
@@ -142,12 +143,6 @@ export default function SummerQuiz({ quizId = 'quiz1', startIndex = 12 }) {
 
   return (
     <div className="quiz">
-      {/* debug banner */}
-      <div style={{ position: 'absolute', left: 12, top: 12, color: '#fff', fontSize: 12, opacity: 0.95, zIndex: 11000 }}>
-        <div>total: {flatQuestions.length}</div>
-        <div>chunk: {chunkStart} - {chunkEnd}</div>
-        <div>currentQ: {currentQ}</div>
-      </div>
 
   <audio ref={audioRef} src="/mondaiBGM.mp3" loop preload="auto" />
       <h1 className="quiz-title">{q && q._quizTitle ? q._quizTitle : '問題'}</h1>

@@ -7,8 +7,13 @@ import Quiz from "./quizzes/quiz.jsx";
 import Animation from "./animation/Animation.jsx";
 import Spring from "./animation/spring.jsx";
 import Summer from "./animation/summer.jsx";
+import Autumn from "./animation/autumn.jsx";
+import Winter from "./animation/winter.jsx";
+import Result from "./animation/result.jsx";
+import Fin from "./animation/fin.jsx";
 import SpringQuiz from "./quizzes/springquiz.jsx";
 import SummerQuiz from "./quizzes/summerquiz.jsx";
+import AutumnQuiz from "./quizzes/autumnquiz.jsx";
 function App() {
     const [route, setRoute] = useState(() => {
     const hash = location.hash.replace("#", "");
@@ -67,8 +72,18 @@ function App() {
         <SpringQuiz />
       ) : route === "summerquiz" ? (
         <SummerQuiz />
+      ) : route === "autumnquiz" ? (
+        <AutumnQuiz />
       ) : route === "summer" ? (
         <Summer />
+      ) : route === "autumn" ? (
+        <Autumn />
+      ) : route === "winter" ? (
+        <Winter />
+      ) : route === "result" ? (
+        <Result />
+      ) : route === "fin" ? (
+        <Fin />
       ) : (
         <Home setRoute={handleRouteChange} />
       )}

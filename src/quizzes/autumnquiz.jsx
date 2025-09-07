@@ -2,90 +2,61 @@ import React, { useEffect, useRef, useState } from 'react'
 import './quiz.css'
 import quizzesData from '../data/quizzes.json'
 
-export default function Quiz({ quizId = 'quiz1' }) {
+export default function AutumnQuiz({ quizId = 'quiz1', startIndex = 19 }) {
   const audioRef = useRef(null)
   const [isPlaying, setIsPlaying] = useState(false)
-  const [quiz, setQuiz] = useState(null)
+  const [showPlayButton, setShowPlayButton] = useState(false)
   const waitingForGestureRef = useRef(false)
-  const [currentQ, setCurrentQ] = useState(0)
+  const [flatQuestions, setFlatQuestions] = useState([])
+  const [chunkStart, setChunkStart] = useState(Math.max(0, Number(startIndex || 0)))
+  const [chunkEnd, setChunkEnd] = useState(0)
+  const [currentQ, setCurrentQ] = useState(Math.max(0, Number(startIndex || 0)))
   const [score, setScore] = useState(0)
   const [selectedKey, setSelectedKey] = useState(null)
   const [finished, setFinished] = useState(false)
 
   useEffect(() => {
-    // load from local JSON; if requested quizId does not exist, fall back to first available
+    // Build a flat list of all questions across categories (preserve category order)
     const all = quizzesData.quizzes || {}
-    let data = all && all[quizId]
-    if (!data) {
-      const keys = Object.keys(all || {})
-      if (keys.length > 0) {
-        const fallbackKey = keys[0]
-        data = all[fallbackKey]
-        console.warn(`[Quiz] quizId "${quizId}" not found; falling back to "${fallbackKey}"`)
-      } else {
-        data = null
-      }
-    }
-    setQuiz(data || null)
-  }, [quizId])
+    const keys = Object.keys(all || {})
+    const flat = []
+    keys.forEach(k => {
+      const block = all[k]
+      if (!block || !block.questions) return
+      const arr = Object.values(block.questions).map(q => ({ ...q, _quizKey: k, _quizTitle: block.title }))
+      flat.push(...arr)
+    })
+    setFlatQuestions(flat)
 
-  // after quiz data is loaded, check if we should start at a specific question index
-  useEffect(() => {
-    if (!quiz) return
-    try {
-      // first, try parsing hash params like #hello?start=6
-      const hash = location.hash || ''
-      const qIdx = (hash.includes('?') && new URLSearchParams(hash.split('?')[1]).get('start')) || null
-      if (qIdx !== null) {
-        const n = parseInt(qIdx, 10)
-        if (!Number.isNaN(n)) {
-          const questions = quiz.questions ? Object.values(quiz.questions) : []
-          const maxIndex = Math.max(0, questions.length - 1)
-          const start = Math.min(n, maxIndex)
-          setCurrentQ(start)
-        }
-        // remove start param from hash to avoid repeated parsing
-        const base = hash.split('?')[0] || '#hello'
-        location.hash = base
-        return
-      }
-
-      // fallback to sessionStorage if present
-      const v = sessionStorage.getItem('quizStartIndex')
-      if (v !== null) {
-        const n = parseInt(v, 10)
-        if (!Number.isNaN(n)) {
-          const questions = quiz.questions ? Object.values(quiz.questions) : []
-          const maxIndex = Math.max(0, questions.length - 1)
-          const start = Math.min(n, maxIndex)
-          setCurrentQ(start)
-        }
-        sessionStorage.removeItem('quizStartIndex')
-      }
-    } catch (e) {}
-  }, [quiz])
+    // compute chunk based on startIndex - chunk size 6
+    const need = Math.max(0, Number(startIndex || 0))
+    const start = Math.min(need, Math.max(0, flat.length))
+    const end = Math.min(flat.length, start + 6)
+    setChunkStart(start)
+    setChunkEnd(end)
+    setCurrentQ(start)
+    console.log('[autumnquiz] flatQuestions built', { total: flat.length, start, end })
+  }, [quizId, startIndex])
 
   useEffect(() => {
-    // try autoplay BGM (may be blocked by browser); implement multiple retries and triggers
+    // try autoplay BGM (may be blocked by browser)
     const tryPlay = async () => {
-      if (!audioRef.current) return false
+      if (!audioRef.current) return
       try {
         await audioRef.current.play()
         setIsPlaying(true)
-        return true
+        setShowPlayButton(false)
       } catch (e) {
-        return false
+        // autoplay blocked -> show manual play button
+        setShowPlayButton(true)
       }
     }
 
     const scheduleRetries = () => {
-      // immediate attempt
       tryPlay().then(ok => {
         if (ok) return
-        // delayed retry after short timeout
         const t = setTimeout(() => { tryPlay() }, 500)
         setTimeout(() => clearTimeout(t), 2000)
-        // if still blocked, wait for next user gesture and then try again
         waitingForGestureRef.current = true
         const gesture = async () => {
           if (!waitingForGestureRef.current) return
@@ -115,29 +86,21 @@ export default function Quiz({ quizId = 'quiz1' }) {
       scheduleRetries()
     }
 
-    // attempt again when route becomes #hello
     const onHash = () => {
       const h = (location.hash || '').replace('#','')
-      if (h === 'hello' || h === '') scheduleRetries()
+      if (h === 'autumnquiz') scheduleRetries()
     }
-    // also retry proactively on focus/click/visibility changes
     const onUserGesture = () => { scheduleRetries() }
     window.addEventListener('hashchange', onHash)
     window.addEventListener('focus', onUserGesture)
     window.addEventListener('click', onUserGesture)
     document.addEventListener('visibilitychange', onUserGesture)
-    return () => {
-      window.removeEventListener('hashchange', onHash)
-      window.removeEventListener('focus', onUserGesture)
-      window.removeEventListener('click', onUserGesture)
-      document.removeEventListener('visibilitychange', onUserGesture)
-      audioRef.current?.pause(); setIsPlaying(false)
-    }
+    return () => { window.removeEventListener('hashchange', onHash); window.removeEventListener('focus', onUserGesture); window.removeEventListener('click', onUserGesture); document.removeEventListener('visibilitychange', onUserGesture); audioRef.current?.pause(); setIsPlaying(false); setShowPlayButton(false) }
   }, [])
 
-  if (!quiz) return <div className="quiz">クイズが見つかりません</div>
+  if (!flatQuestions || flatQuestions.length === 0) return <div className="quiz">クイズが見つかりません</div>
 
-  const questions = quiz.questions ? Object.values(quiz.questions) : []
+  const questions = flatQuestions
   const q = questions[currentQ]
 
   const handleChoice = (idx) => {
@@ -153,7 +116,8 @@ export default function Quiz({ quizId = 'quiz1' }) {
     // short delay to show feedback, then advance or finish
     setTimeout(() => {
       setSelectedKey(null)
-      if (currentQ + 1 >= questions.length) {
+      // finish when we've reached the chunk end
+      if (currentQ + 1 >= chunkEnd) {
         setFinished(true)
       } else {
         setCurrentQ(c => c + 1)
@@ -161,15 +125,17 @@ export default function Quiz({ quizId = 'quiz1' }) {
     }, 800)
   }
 
-  // If finished, render only the minimal results view requested by user
   if (finished) {
+    const totalShown = Math.max(0, chunkEnd - chunkStart)
+    // store result so result page can read it
+    try { sessionStorage.setItem('lastQuizResult', JSON.stringify({ score, total: totalShown })) } catch (e) {}
     return (
       <div className="quiz">
         <div className="quiz-results" style={{display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',transform:'translateY(40px) scale(1.3)'}}>
           <h2>結果</h2>
-          <p>正解数: {score} / {questions.length}</p>
-          <button className="ctrl primary image-btn" onClick={() => { location.hash = 'spring' }} aria-label="再挑戦">
-            <img src="/next.png" alt="再挑戦" style={{width:125,height:'auto'}} />
+          <p>正解数: {score} / {totalShown}</p>
+          <button className="ctrl primary image-btn" onClick={() => { location.hash = 'winter' }} aria-label="次へ">
+            <img src="/next.png" alt="次へ" style={{width:125,height:'auto'}} onError={(e)=>{try{e.currentTarget.onerror=null; e.currentTarget.src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%23ffffff" d="M8 5v14l11-7z"/></svg>'}catch(err){}}} />
           </button>
         </div>
       </div>
@@ -178,12 +144,11 @@ export default function Quiz({ quizId = 'quiz1' }) {
 
   return (
     <div className="quiz">
-      <audio ref={audioRef} src="/mondaiBGM.mp3" loop preload="auto" />
-  {/* autoplay attempts handled via lifecycle and user gesture listeners; no manual button */}
-      <h1 className="quiz-title">{quiz.title || '問題'}</h1>
 
-      {/* show the current question prominently where the description used to be */}
-      <div className="big-question">{q ? q.text : (quiz.description || '')}</div>
+  <audio ref={audioRef} src="/mondaiBGM.mp3" loop preload="auto" />
+      <h1 className="quiz-title">{q && q._quizTitle ? q._quizTitle : '問題'}</h1>
+
+      <div className="big-question">{q ? q.text : ''}</div>
 
       {q ? (
         <div className='quizkaitou'>
