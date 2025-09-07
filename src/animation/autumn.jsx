@@ -3,6 +3,7 @@ import './animation.css'
 
 export default function Autumn() {
   const scenes = [
+    { image: '/kazyuen.jpg', text: '（夏の暑さが引いてきたな…）' },
     { image: '/kazyuen.jpg', text: '今日は果物狩りに来た' },
     { image: '/kazyuen.jpg', text: '店員「お待たせしました」' },
     { image: '/kazyuen.jpg', text: '店員「今から果物狩りのルール説明を行います」' },
