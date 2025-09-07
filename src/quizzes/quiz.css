@@ -174,3 +174,12 @@
   transform: translateY(-30px);
   transition: transform 120ms ease, filter 120ms ease;
 }
+
+/* fin button uses the same hover lift behavior as next image */
+.fin-btn img {
+  transition: transform 160ms ease, filter 160ms ease;
+}
+.fin-btn:hover img {
+  filter: saturate(1.25) brightness(1.06);
+  transform: translateY(-4px) scale(1.03);
+}

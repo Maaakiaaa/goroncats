@@ -6,7 +6,7 @@ export default function Animation() {
     { image: '/suteneko.jpg', text: '捨てられた段ボールには「拾ってください」と書かれていた' },
     { image: '/suteneko.jpg', text: '「なんだ…これ？ ひろってください？」' },
     { image: '/suteneko.jpg', text: '(箱の中身を見る)' },
-    { image: '/suteneko.jpg', text: '「ねこ？なんでねこまるが捨てられているんだ？」' },
+    { image: '/suteneko.jpg', text: '「ねこ？なんでねこが捨てられているんだ？」' },
     { image: '/suteneko.jpg', text: '(ねこが必死に目で訴えてくる)' },
     { image: '/suteneko.jpg', text: '「しょうがないひろうか…」' },
     { image: '/bath.png', text: '(汚れていたので浴室に向かった）' },
