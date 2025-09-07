@@ -1,0 +1,176 @@
+/* Styles for quiz component - fixed to viewport bottom */
+.quiz {
+  /* layout variables so the hero can reference the same sizes */
+  --quiz-height: 300px;
+  --quiz-bottom: 30px; /* distance from viewport bottom */
+
+  position: fixed;
+  left: 50%;
+  bottom: var(--quiz-bottom);
+  transform: translateX(-50%);
+  width: calc(100% - 2rem);
+  max-width: 900px;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  height: var(--quiz-height);
+  background: rgba(0,0,0,0.6);
+  border-radius: 12px;
+  box-shadow: 0 -8px 24px rgba(0,0,0,0.08);
+  z-index: 9999;
+}
+
+/* decorative image that sits above the quiz box (use public/quiz-hero.png) */
+.quiz::before {
+  content: '';
+  position: absolute;
+  /* place the hero immediately above the quiz box */
+  bottom: 100%;
+  /* center horizontally relative to the quiz box to guarantee the same width */
+  left: 50%;
+  transform: translateX(-50%);
+  /* ensure the pseudo-element exactly matches the quiz width */
+  width: 100%;
+  box-sizing: border-box;
+  /* height = remaining viewport height minus quiz height and bottom spacing */
+  height: calc(100vh - var(--quiz-height) - var(--quiz-bottom));
+  background-image: url('/quiz-hero.png');
+  /* scale the background to exactly the element width to avoid visible overflow */
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  background-position: center top;
+  pointer-events: none;
+  z-index: 10000; /* above the box */
+}
+
+@media (max-width: 420px) {
+  .quiz {
+    width: calc(100% - 1rem);
+    padding: 0.9rem 1rem;
+    border-radius: 10px;
+    /* smaller quiz height on very small screens */
+    --quiz-height: 220px;
+  }
+
+  .quiz::before {
+    /* ensure the hero remains proportional on small screens */
+    height: calc(100vh - var(--quiz-height) - var(--quiz-bottom));
+  }
+}
+.quiz-title {
+  font-size: 40px;
+  color: #ffffff;
+  margin: 0 0 0.25rem 0;
+}
+.quiz-desc {
+  color: rgba(255,255,255,0.75);
+  margin: 0;
+}
+
+.big-question {
+  font-size: 40px; /* same as title */
+  color: #fff; /* white for legibility */
+  margin: 0.75rem 0 0.5rem 0;
+  font-weight: 700;
+}
+
+
+/* grid container for answers */
+.quizkaitou {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  margin-top: auto; /* push grid to bottom */
+  align-items: stretch;
+}
+
+/* answer label style - flexible to 2x2 grid */
+.quizlabel {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: none;
+  font-size: 14px; /* slightly smaller */
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem 0.4rem; /* reduced padding */
+  min-height: 38px; /* ~10px smaller than before */
+  border-radius: 12px;
+  background: var(--Schemes-On-Secondary, #FFF);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  cursor: pointer;
+  user-select: none;
+}
+
+.quizlabel:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+}
+
+.quizlabel.correct {
+  background: #d4f7d4;
+  border: 2px solid #28a745;
+}
+.quizlabel.incorrect {
+  background: #ffd6d6;
+  border: 2px solid #e55353;
+}
+
+.quizlabel:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+.quizlabel:focus {
+  outline-offset: 2px;
+}
+
+@media (max-width: 420px) {
+  .quiz {
+    width: calc(100% - 1rem);
+    padding: 0.9rem 1rem;
+    border-radius: 10px;
+  }
+}
+
+.quiz-results {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  color: #fff;
+}
+
+.quiz-results h2 {
+  margin: 0;
+}
+
+/* image button for retry */
+.image-btn {
+  /* keep button neutral so the image itself defines appearance */
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+.image-btn img {
+  display: block;
+  width: 96px;
+  height: auto;
+  max-width: 40vw;
+  transition: transform 160ms ease, filter 160ms ease;
+}
+
+/* hover: color change (increase saturation/brightness) */
+.image-btn:hover img {
+  filter: saturate(1.25) brightness(1.06);
+  transform: translateY(-4px) scale(1.03);
+}
+.ctrl.primary.image-btn {
+  /* ensure no background color from .ctrl.primary leaks through */
+  background: none;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.06));
+  transform: translateY(-30px);
+  transition: transform 120ms ease, filter 120ms ease;
+}

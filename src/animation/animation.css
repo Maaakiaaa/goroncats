@@ -1,0 +1,85 @@
+.animation-root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  min-height: 60vh;
+  color: #222;
+}
+.scene {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+.scene-image {
+  display: block;
+  width: 90%;
+  height: auto;
+  max-width: 100%;
+  margin: 0 auto;
+  border-radius: 8px;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.12);
+}
+.scene-text {
+  font-size: 1.25rem;
+  background: rgba(91, 217, 255, 0.8);
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+}
+.scene-text {
+  font-size: 1.25rem;
+  /* unify with quiz look: dark semi-opaque rectangle */
+  background: var(--Schemes-Scrim, #000);
+  color: #fff;
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  box-shadow: 0 -8px 24px rgba(0,0,0,0.08);
+  width: calc(100% - 2rem);
+  max-width: 900px;
+  text-align: center;
+}
+
+
+.typing-text {
+  white-space: pre-wrap;
+}
+.typing-caret {
+  display: inline-block;
+  margin-left: 6px;
+  opacity: 0;
+  transition: opacity 120ms linear;
+}
+.typing-caret.active {
+  opacity: 1;
+  animation: blink 1s steps(2, start) infinite;
+}
+@keyframes blink {
+  to { visibility: hidden; }
+}
+.controls {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.5rem;
+}
+.ctrl {
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  border: none;
+  background: #eee;
+  cursor: pointer;
+}
+.ctrl.secondary {
+  background: #dfe6ff;
+}
+
+.ctrl.primary {
+  background: #5b46ff;
+  color: white;
+  font-weight: 600;
+}
+
+.ctrl[aria-pressed="true"], .ctrl:active {
+  transform: translateY(0);
+}
