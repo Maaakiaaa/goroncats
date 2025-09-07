@@ -1,21 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import './animation.css'
 
-export default function Autumn() {
+export default function Winter() {
   const scenes = [
-    { image: '/kazyuen.jpg', text: '（秋のはじまり、猫たちはこたつで丸くなる…）' },
-    { image: '/kazyuen.jpg', text: '外はすっかり涼しくなった' },
-    { image: '/kazyuen.jpg', text: 'ストーブの前でぬくぬく過ごす猫たち' },
-    { image: '/kazyuen.jpg', text: 'ストーブの前でぬくぬく、みんなで丸くなって眠る' },
-    { image: '/kazyuen.jpg', text: 'ストーブの前では、みんなで幸せそうに丸くなっている！' },
-    { image: '/kazyuen.jpg', text: '寝返りをうった猫が、みんなの上に乗っかってしまった' },
-    { image: '/kazyuen.jpg', text: '「丸くなって、もっとあったかくなろうか」' },
-    { image: '/kazyuen.jpg', text: 'みんなで重なり合って眠っている。' },
-    { image: '/kazyuen.jpg', text: '重なり合いながら、ぬくもりを分け合う猫たち' },
-    { image: '/room.png', text: '部屋の中はぬくぬくの幸せ空間だ' },
-    { image: '/room.png', text: '重なり合う幸せ、みんなでぬくぬくしている' },
-    { image: '/room.png', text: '「おやすみ！おやすみ！」みんなで仲良く眠る夜' },
-    { image: '/room.png', text: 'そして、みんな一つ、二つ、三つ…と夢の中へ！' },
+    { image: '/yuki.jpg', text: '「もしも、あの時ねこまるを拾ってなかったら…」' },
+    { image: '/yuki.jpg', text: 'ねこまるは僕に寄り添い' },
+    { image: '/yuki.jpg', text: '「ありがとう」っと言いたげに喉を鳴らしている' },
+    { image: '/kotatu.jpg', text: '「寒いね、ねこまる。こたつに入ろうか。」' },
+    { image: '/kotatu.jpg', text: 'そう声をかけると、ねこまるはすぐにこたつ布団の中へ潜り込んだ。' },
+    { image: '/kotatu.jpg', text: '僕はみかんをむきながら、ねこまるの寝息を聞いていた。' },
+    { image: '/kotatu.jpg', text: 'こたつの中はふたりだけの世界だった。' },
+    { image: '/kotatu.jpg', text: '「ずっとこうしていられたらいいね。」' }
   ]
 
   const [index, setIndex] = useState(0)
