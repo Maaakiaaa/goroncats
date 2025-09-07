@@ -3,14 +3,14 @@ import './animation.css'
 
 export default function autumn() {
   const scenes = [
-    { image: '/suteneko.jpg', text: '今日は果物狩りに来た' },
-    { image: '/suteneko.jpg', text: '店員「お待たせしました」' },
-    { image: '/suteneko.jpg', text: '店員「今から果物狩りのルール説明を行います」' },
-    { image: '/suteneko.jpg', text: '店員「それでは果物狩り楽しんでください！」' },
-    { image: '/suteneko.jpg', text: '僕がとった果物を興味深そうにねこまるが見ている' },
-    { image: '/suteneko.jpg', text: '「待ってて、食べやすいようにするから」' },
-    { image: '/bath.png', text: '小さく切って皿にのせてやる。' },
-    { image: '/bath.png', text: 'ねこまるは満足そうにペロッと平らげた' },
+    { image: '/kazyuen.jpg', text: '今日は果物狩りに来た' },
+    { image: '/kazyuen.jpg', text: '店員「お待たせしました」' },
+    { image: '/kazyuen.jpg', text: '店員「今から果物狩りのルール説明を行います」' },
+    { image: '/kazyuen.jpg', text: '店員「それでは果物狩り楽しんでください！」' },
+    { image: '/kazyuen.jpg', text: '僕がとった果物を興味深そうにねこまるが見ている' },
+    { image: '/kazyuen.jpg', text: '「待ってて、食べやすいようにするから」' },
+    { image: '/kazyuen.png', text: '小さく切って皿にのせてやる。' },
+    { image: '/kazyuen.png', text: 'ねこまるは満足そうにペロッと平らげた' },
     { image: '/room.png', text: '換毛期「今日はやけにねこまるの毛が多いな」' },
     { image: '/room.png', text: 'ねこまるが毛をまき散らしながら甘えに来た' },
     { image: '/room.png', text: '「確保！！」僕は猫用のブラシでねこまるを徹底的にブラッシングした' },
