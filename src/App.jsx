@@ -4,6 +4,9 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import { Home } from "./Home.jsx";
 import Quiz from "./quizzes/quiz.jsx";
+import Animation from "./animation/Animation.jsx";
+import Spring from "./animation/spring.jsx";
+import SpringQuiz from "./quizzes/springquiz.jsx";
 function App() {
     const [route, setRoute] = useState(() => {
     const hash = location.hash.replace("#", "");
@@ -31,10 +34,16 @@ function App() {
       {route === "home" ? (
         <>
           <img src="/neko.png" alt="Neko" className="neko-img" />
-          <a
-            href="/index.html#hello"
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            type="button"
+            className="start-link"
+            onClick={() => {
+              // mark that animation should autoplay (user gesture present)
+              try { sessionStorage.setItem('animationAutoplay', '1') } catch (e) {}
+              location.hash = 'animation'
+            }}
+            aria-label="Start"
+            style={{ background: 'none', border: 'none', padding: 0 }}
           >
             <img
               src="/start.png"
@@ -42,12 +51,18 @@ function App() {
               className="start-button"
               style={{ cursor: "pointer" }}
             />
-          </a>
+          </button>
         </>
       ) : route === "hello" ? (
         <div className='background'>
           <Quiz />
         </div>
+      ) : route === "animation" ? (
+        <Animation />
+      ) : route === "spring" ? (
+        <Spring />
+      ) : route === "springquiz" ? (
+        <SpringQuiz />
       ) : (
         <Home setRoute={handleRouteChange} />
       )}
