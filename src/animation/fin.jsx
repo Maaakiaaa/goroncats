@@ -3,16 +3,16 @@ import './animation.css'
 
 export default function Fin() {
   const scenes = [
-    { image: '/zinzya.jpg', text: '�u������Ə��w�ɍs�������v' },
-    { image: '/zinzya.jpg', text: '�˂��܂��A��āA�n���ŗL���Ȑ_�Ђ֌��������B' },
-    { image: '/zinzya.jpg', text: '�l���݂̒��A�˂��܂�͓ˑR�����Ƙr�𔲂��āA�ǂ����֑��苎���Ă��܂����B' },
-    { image: '/zinzya.jpg', text: '�Q�ĂĒT����������A�˂��܂�͌�����Ȃ��B' },
-    { image: '/zinzya.jpg', text: '������A�ߏ��̌����ŁA�˂��܂邪���̔L�Ɗy�������ɉ߂����Ă���p�����������B' },
-    { image: '/CatHappy.jpg', text: '�\�\�˂��܂�́A�����̋��ꏊ���������̂�������Ȃ��B' },
-    { image: '/CatHappy.jpg', text: '���ɂۂ�����ƌ����󂢂��悤�ȋC�����ŁA�Â��Ɏ�����킹���B' },
-    { image: '/CatHappy.jpg', text: '�˂��܂邪�K���ł���܂��悤�ɁB' },
-    { image: '/CatHappy.jpg', text: '���ꂾ�����A���͊肤�B' },
-    { image: '/CatHappy.jpg', text: '�K��������2�l' }
+    { image: '/zinzya.jpg', text: '「ちょっと初詣に行こうか」' },
+    { image: '/zinzya.jpg', text: 'ねこまるを連れて、地元で有名な神社へ向かった。' },
+    { image: '/zinzya.jpg', text: '人混みの中、ねこまるは突然するりと腕を抜けて、どこかへ走り去ってしまった。' },
+    { image: '/zinzya.jpg', text: '慌てて探し回ったが、ねこまるは見つからない。' },
+    { image: '/zinzya.jpg', text: '数日後、近所の公園で、ねこまるが他の猫と楽しそうに過ごしている姿を見かけた。' },
+    { image: '/CatHappy.jpg', text: '――ねこまるは、自分の居場所を見つけたのかもしれない。' },
+    { image: '/CatHappy.jpg', text: '胸にぽっかりと穴が空いたような気持ちで、静かに手を合わせた。' },
+    { image: '/CatHappy.jpg', text: 'ねこまるが幸せでありますように。' },
+    { image: '/CatHappy.jpg', text: 'それだけを、今は願う。' },
+    { image: '/CatHappy.jpg', text: '幸せそうな2人' }
   ]
 
   const [index, setIndex] = useState(0)

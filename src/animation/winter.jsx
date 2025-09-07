@@ -3,14 +3,14 @@ import './animation.css'
 
 export default function Winter() {
   const scenes = [
-    { image: '/yuki.jpg', text: '�u�������A���̎��˂��܂���E���ĂȂ�������c�v' },
-    { image: '/yuki.jpg', text: '�˂��܂�͖l�Ɋ��Y��' },
-    { image: '/yuki.jpg', text: '�u���肪�Ƃ��v���ƌ��������ɍA��炵�Ă���' },
-    { image: '/kotatu.jpg', text: '�u�����ˁA�˂��܂�B�����ɓ��낤���B�v' },
-    { image: '/kotatu.jpg', text: '��������������ƁA�˂��܂�͂����ɂ����z�c�̒��֐��荞�񂾁B' },
-    { image: '/kotatu.jpg', text: '�l�݂͂�����ނ��Ȃ���A�˂��܂�̐Q���𕷂��Ă����B' },
-    { image: '/kotatu.jpg', text: '�����̒��͂ӂ��肾���̐��E�������B' },
-    { image: '/kotatu.jpg', text: '�u�����Ƃ������Ă���ꂽ�炢���ˁB�v' }
+    { image: '/yuki.jpg', text: '「もしも、あの時ねこまるを拾ってなかったら…」' },
+    { image: '/yuki.jpg', text: 'ねこまるは僕に寄り添い' },
+    { image: '/yuki.jpg', text: '「ありがとう」っと言いたげに喉を鳴らしている' },
+    { image: '/kotatu.jpg', text: '「寒いね、ねこまる。こたつに入ろうか。」' },
+    { image: '/kotatu.jpg', text: 'そう声をかけると、ねこまるはすぐにこたつ布団の中へ潜り込んだ。' },
+    { image: '/kotatu.jpg', text: '僕はみかんをむきながら、ねこまるの寝息を聞いていた。' },
+    { image: '/kotatu.jpg', text: 'こたつの中はふたりだけの世界だった。' },
+    { image: '/kotatu.jpg', text: '「ずっとこうしていられたらいいね。」' }
   ]
 
   const [index, setIndex] = useState(0)
