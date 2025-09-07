@@ -13,7 +13,8 @@ export default function autumn() {
     { image: '/bath.png', text: 'ねこまるは満足そうにペロッと平らげた' },
     { image: '/room.png', text: '換毛期「今日はやけにねこまるの毛が多いな」' },
     { image: '/room.png', text: 'ねこまるが毛をまき散らしながら甘えに来た' },
-    { image: '/bath.png', text: '' }
+    { image: '/room.png', text: '「確保！！」僕は猫用のブラシでねこまるを徹底的にブラッシングした' },
+    { image: '/room.png', text: 'すると、毛玉が１つ、２つ、たくさん出てきた！' },
   ]
 
   const [index, setIndex] = useState(0)
@@ -108,3 +109,4 @@ export default function autumn() {
       </div>
     </div>
   )
+}
